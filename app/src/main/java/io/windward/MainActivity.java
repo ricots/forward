@@ -5,15 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MainActivity extends Activity {
-    private BroadcastReceiver receiver;
-    private int originalBrightnessSetting;
+    private BroadcastReceiver gpsReceiver;
+    private BroadcastReceiver magnetoReceiver;
     public static LocalBroadcastManager broadcastManager;
 
     @Override
@@ -23,18 +22,15 @@ public class MainActivity extends Activity {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SEND);
-        receiver = new GPSReceiver(this);
+        gpsReceiver = new GPSReceiver(this);
+        magnetoReceiver = new MagnetoReceiver(this);
         broadcastManager = LocalBroadcastManager.getInstance(this);
-        broadcastManager.registerReceiver(receiver, filter);
-
-        try {
-            originalBrightnessSetting = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
-        } catch (Settings.SettingNotFoundException e) {
-            originalBrightnessSetting = -1;
-        }
+        broadcastManager.registerReceiver(gpsReceiver, filter);
+        broadcastManager.registerReceiver(magnetoReceiver, filter);
 
         // Start the dim service
         startService(new Intent(this, GPSService.class));
+        startService(new Intent(this, MagnetoService.class));
     }
 
     @Override
@@ -62,7 +58,8 @@ public class MainActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        broadcastManager.unregisterReceiver(receiver);
+        broadcastManager.unregisterReceiver(gpsReceiver);
+        broadcastManager.unregisterReceiver(magnetoReceiver);
     }
 
     @Override
@@ -70,7 +67,10 @@ public class MainActivity extends Activity {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(GPSService.INTENT_EXTRA_LAT);
         intentFilter.addAction(GPSService.INTENT_EXTRA_LON);
-        LocalBroadcastManager.getInstance(this).registerReceiver((receiver), intentFilter);
+        LocalBroadcastManager.getInstance(this).registerReceiver((gpsReceiver), intentFilter);
+
+        IntentFilter i = new IntentFilter(MagnetoService.INTENT_EXTRA_HEADING);
+        LocalBroadcastManager.getInstance(this).registerReceiver((magnetoReceiver), i);
     }
 
     @Override

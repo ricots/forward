@@ -37,21 +37,22 @@ public class GPSReceiver extends BroadcastReceiver {
         lon = intent.getStringExtra(GPSService.INTENT_EXTRA_LON);
         mps = intent.getFloatExtra(GPSService.INTENT_EXTRA_SPEED, 0.0f);
 
-        Log.d("GPS: ", lat + " " + lon);
+        if (lat != null && lon != null) {
+            Log.d("GPS: ", lat + " " + lon);
 
+            if (this.latTextField != null && lat != null) {
+                this.latTextField.setText(formatCoordinate(lat));
+            }
 
-        if (this.latTextField != null && lat != null) {
-            this.latTextField.setText(formatCoordinate(lat));
-        }
+            if (this.lonTextField != null && lon != null) {
+                this.lonTextField.setText(formatCoordinate(lon));
+            }
 
-        if (this.lonTextField != null && lon != null) {
-            this.lonTextField.setText(formatCoordinate(lon));
-        }
-
-        if (this.speedMPS != null) {
-            knots = mps * METERS_TO_KNOTS;
-            this.speedMPS.setText(String.valueOf(mps));
-            this.speedKnots.setText(String.valueOf(knots));
+            if (this.speedMPS != null) {
+                knots = mps * METERS_TO_KNOTS;
+                this.speedMPS.setText(String.valueOf(mps));
+                this.speedKnots.setText(String.valueOf(knots));
+            }
         }
     }
 

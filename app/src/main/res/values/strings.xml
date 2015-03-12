@@ -7,5 +7,6 @@
     <string name="lon_label">Longitude</string>
     <string name="speed_in_mps_label">Meters/Second</string>
     <string name="speed_in_knots_label">Knots</string>
+    <string name="heading_label">Heading</string>
 
 </resources>

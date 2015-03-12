@@ -25,6 +25,18 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".MagnetoService"
+            android:exported="false"/>
+
+        <receiver android:name=".MagnetoReceiver" android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="io.windward.MainActivity">
 
