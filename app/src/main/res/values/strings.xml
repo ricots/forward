@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Windward</string>
+    <string name="action_settings">Settings</string>
+    <string name="lat_label">Latitude</string>
+    <string name="lon_label">Longitude</string>
+    <string name="speed_in_mps_label">Meters/Second</string>
+    <string name="speed_in_knots_label">Knots</string>
+
+</resources>
