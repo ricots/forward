@@ -115,21 +115,6 @@
             </TextView>
 
             <TextView
-                android:id="@+id/speed_in_knots_label"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:text="@string/speed_in_knots_label"
-                android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
-            </TextView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <TextView
                 android:id="@+id/speed_in_mps"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -138,17 +123,38 @@
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/speed_in_knots_label"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:gravity="left"
+                android:text="@string/speed_in_knots_label"
+                android:textSize="@dimen/label_text_size"
+                android:textColor="@android:color/white">
+            </TextView>
 
             <TextView
                 android:id="@+id/speed_in_knots"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:layout_toRightOf="@+id/speed_in_mps"
+                android:layout_alignParentLeft="true"
+                android:gravity="left"
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
         </RelativeLayout>
+
+        <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:name="com.google.android.gms.maps.MapFragment"-->
+            <!--android:id="@+id/map"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
     </LinearLayout>
 </RelativeLayout>
