@@ -1,4 +1,4 @@
-package io.windward;
+package io.windward.services;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -7,6 +7,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import io.windward.MainActivity;
+import io.windward.receivers.GPSReceiver;
 
 public class GPSService extends IntentService implements LocationListener {
     private LocationManager lm;

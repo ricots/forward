@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.windward" >
-    <!--<meta-data-->
-        <!--android:name="com.google.android.gms.version"-->
-        <!--android:value="@integer/google_play_services_version" />-->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,10 +14,10 @@
         android:theme="@style/AppTheme" >
 
         <service
-            android:name=".GPSService"
+            android:name=".services.GPSService"
             android:exported="false"/>
 
-        <receiver android:name=".GPSReceiver" android:enabled="true" >
+        <receiver android:name=".receivers.GPSReceiver" android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -28,10 +26,10 @@
         </receiver>
 
         <service
-            android:name=".MagnetoService"
+            android:name=".services.MagnetoService"
             android:exported="false"/>
 
-        <receiver android:name=".MagnetoReceiver" android:enabled="true" >
+        <receiver android:name=".receivers.MagnetoReceiver" android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>

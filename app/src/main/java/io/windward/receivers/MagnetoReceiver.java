@@ -1,10 +1,13 @@
-package io.windward;
+package io.windward.receivers;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
+
+import io.windward.services.MagnetoService;
+import io.windward.R;
 
 public class MagnetoReceiver extends BroadcastReceiver {
     private Activity activity;
