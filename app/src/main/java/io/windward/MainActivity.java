@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
     private static final String LICENSE_KEY = "XTUN3Q0ZEYktTQjh1eEpZWHJ3aGRJbk9VZ0ZCdnVUZytBaFFiU00xWFhxSUVleUQzRDgxUGNPQ0puWko3Q2c9PQoKcHJvZHVjdHM9c2RrLWFuZHJvaWQtMy4qCnBhY2thZ2VOYW1lPWlvLndpbmR3YXJkCndhdGVybWFyaz1udXRpdGVxCnVzZXJLZXk9NTczOTZmZjU5Yjc0MDhiM2RkYWUwMzNjODZiODFjNmQK";
     public static LocalBroadcastManager broadcastManager;
     private MapView mapView;
+    private Plotter plotter;
 
     private void startOfflineMaps() {
         // 1. The initial step: register your license. This must be done before using MapView!
@@ -59,8 +60,9 @@ public class MainActivity extends Activity {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SEND);
-        gpsReceiver = new GPSReceiver(this);
-        magnetoReceiver = new MagnetoReceiver(this);
+        plotter = new Plotter(this);
+        gpsReceiver = new GPSReceiver(this, plotter);
+        magnetoReceiver = new MagnetoReceiver(this, plotter);
         broadcastManager = LocalBroadcastManager.getInstance(this);
         broadcastManager.registerReceiver(gpsReceiver, filter);
         broadcastManager.registerReceiver(magnetoReceiver, filter);
@@ -103,8 +105,8 @@ public class MainActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter(GPSService.INTENT_EXTRA_LAT);
-        intentFilter.addAction(GPSService.INTENT_EXTRA_LON);
+        IntentFilter intentFilter = new IntentFilter(GPSService.INTENT_EXTRA_LAT_MINUTES);
+        intentFilter.addAction(GPSService.INTENT_EXTRA_LON_MINUTES);
         LocalBroadcastManager.getInstance(this).registerReceiver((gpsReceiver), intentFilter);
 
         IntentFilter i = new IntentFilter(MagnetoService.INTENT_EXTRA_HEADING);

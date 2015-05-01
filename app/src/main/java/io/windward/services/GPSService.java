@@ -13,8 +13,10 @@ import io.windward.receivers.GPSReceiver;
 
 public class GPSService extends IntentService implements LocationListener {
     private LocationManager lm;
-    public static final String INTENT_EXTRA_LAT = "lat";
-    public static final String INTENT_EXTRA_LON = "lon";
+    public static final String INTENT_EXTRA_LAT_DEGREES = "lat_degrees";
+    public static final String INTENT_EXTRA_LON_DEGREES = "lon_degrees";
+    public static final String INTENT_EXTRA_LAT_MINUTES = "lat_minutes";
+    public static final String INTENT_EXTRA_LON_MINUTES = "lon_minutes";
     public static final String INTENT_EXTRA_SPEED = "speed";
     private double longitude;
     private double latitude;
@@ -49,8 +51,10 @@ public class GPSService extends IntentService implements LocationListener {
 
         Intent i = new Intent();
         i.setAction(Intent.ACTION_SEND);
-        i.putExtra(INTENT_EXTRA_LAT, location.convert(latitude, Location.FORMAT_MINUTES));
-        i.putExtra(INTENT_EXTRA_LON, location.convert(longitude, Location.FORMAT_MINUTES));
+        i.putExtra(INTENT_EXTRA_LAT_DEGREES, location.convert(latitude, Location.FORMAT_DEGREES));
+        i.putExtra(INTENT_EXTRA_LON_DEGREES, location.convert(longitude, Location.FORMAT_DEGREES));
+        i.putExtra(INTENT_EXTRA_LAT_MINUTES, location.convert(latitude, Location.FORMAT_MINUTES));
+        i.putExtra(INTENT_EXTRA_LON_MINUTES, location.convert(longitude, Location.FORMAT_MINUTES));
         i.putExtra(INTENT_EXTRA_SPEED, speedInMPS);
         i.setClass(this, GPSReceiver.class);
         MainActivity.broadcastManager.sendBroadcast(i);

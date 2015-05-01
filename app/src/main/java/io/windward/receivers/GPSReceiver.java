@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 
-import io.windward.services.GPSService;
+import io.windward.Plotter;
 import io.windward.R;
+import io.windward.services.GPSService;
 
 public class GPSReceiver extends BroadcastReceiver {
     private static final float METERS_TO_KNOTS = 1.94384f;
@@ -21,40 +22,53 @@ public class GPSReceiver extends BroadcastReceiver {
     private TextView speedKnots;
     private String lat;
     private String lon;
+    private String latDegrees;
+    private String lonDegrees;
     private float mps;
     private float knots;
+    private Plotter plotter;
 
     public GPSReceiver() { }
 
-    public GPSReceiver(Activity activity) {
+    public GPSReceiver(Activity activity, Plotter plotter) {
         this.activity = activity;
         this.latTextField = (TextView) activity.findViewById(R.id.latitude);
         this.lonTextField = (TextView) activity.findViewById(R.id.longitude);
         this.speedMPS = (TextView) activity.findViewById(R.id.speed_in_mps);
         this.speedKnots = (TextView) activity.findViewById(R.id.speed_in_knots);
+        this.plotter = plotter;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        lat = intent.getStringExtra(GPSService.INTENT_EXTRA_LAT);
-        lon = intent.getStringExtra(GPSService.INTENT_EXTRA_LON);
+        latDegrees = intent.getStringExtra(GPSService.INTENT_EXTRA_LAT_DEGREES);
+        lonDegrees = intent.getStringExtra(GPSService.INTENT_EXTRA_LON_DEGREES);
+        lat = intent.getStringExtra(GPSService.INTENT_EXTRA_LAT_MINUTES);
+        lon = intent.getStringExtra(GPSService.INTENT_EXTRA_LON_MINUTES);
+
+
         mps = intent.getFloatExtra(GPSService.INTENT_EXTRA_SPEED, 0.0f);
 
         if (lat != null && lon != null) {
             Log.d("GPS: ", lat + " " + lon);
 
+
             if (this.latTextField != null && lat != null) {
-                this.latTextField.setText(formatCoordinate(lat));
+                this.latTextField.setText(latDegrees + "° N");
             }
 
             if (this.lonTextField != null && lon != null) {
-                this.lonTextField.setText(formatCoordinate(lon));
+                this.lonTextField.setText(lonDegrees + "° W");
             }
 
             if (this.speedMPS != null) {
                 knots = mps * METERS_TO_KNOTS;
                 this.speedMPS.setText(String.valueOf(mps));
                 this.speedKnots.setText(String.valueOf(knots));
+            }
+
+            if (latDegrees != null && lonDegrees != null) {
+                plotter.plot(Float.parseFloat(latDegrees), Float.parseFloat(lonDegrees));
             }
         }
     }
@@ -63,6 +77,6 @@ public class GPSReceiver extends BroadcastReceiver {
         String[] parts = coordinate.split(":");
         String minutesSecondsStr = parts[1];
         String[] minutesSeconds = minutesSecondsStr.split("\\.");
-        return parts[0] + "°" + minutesSeconds[0] + "'" + minutesSeconds[1] + "\"";
+        return parts[0] + "°" + minutesSeconds[0] + "." + minutesSeconds[1] + "' ";
     }
 }
