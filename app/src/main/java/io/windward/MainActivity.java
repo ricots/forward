@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.nutiteq.datasources.NutiteqOnlineTileDataSource;
 import com.nutiteq.datasources.TileDataSource;
@@ -57,6 +59,23 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(io.windward.R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                findViewById(R.id.LatWrapper).setVisibility(View.GONE);
+                findViewById(R.id.LonWrapper).setVisibility(View.GONE);
+                findViewById(R.id.headingWrapper).setVisibility(View.GONE);
+                findViewById(R.id.speedInKnotsWrapper).setVisibility(View.GONE);
+                findViewById(R.id.speedInMpsWrapper).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.LatWrapper).setVisibility(View.VISIBLE);
+                findViewById(R.id.LonWrapper).setVisibility(View.VISIBLE);
+                findViewById(R.id.headingWrapper).setVisibility(View.VISIBLE);
+                findViewById(R.id.speedInKnotsWrapper).setVisibility(View.VISIBLE);
+                findViewById(R.id.speedInMpsWrapper).setVisibility(View.VISIBLE);
+                findViewById(R.id.mapWrapper).setVisibility(View.VISIBLE);
+            }
+        }
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SEND);
