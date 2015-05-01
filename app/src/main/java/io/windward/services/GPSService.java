@@ -29,13 +29,12 @@ public class GPSService extends IntentService implements LocationListener {
     @Override
     public void onStart(Intent intent, int startId) {
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
-        }
         if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 10, this);
         }
-
+        if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
+        }
     }
 
     @Override

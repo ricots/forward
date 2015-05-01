@@ -76,7 +76,9 @@ public class Plotter {
         MapPos pos = new MapPos(lon, lat);
         MapPos wgs84 = proj.fromWgs84(pos);
         Marker m = new Marker(wgs84, sharedMarkerStyle);
-        m.setRotation(heading);
+
+        // Rotation is clockwise in Nutiteq
+        m.setRotation(-heading);
         vectorDataSource.add(m);
         mapView.setFocusPos(wgs84, 0);
         mapView.setZoom(15, wgs84, 0);
