@@ -15,7 +15,7 @@ import io.windward.receivers.MagnetoReceiver;
 
 public class MagnetoService extends IntentService implements SensorEventListener {
     public static final String INTENT_EXTRA_HEADING = "azimuth";
-    private static final int rateToUpdate = 15;  // Skip ever N updates
+    private static final int rateToUpdate = 25;  // Skip ever N updates
 
     private ContentResolver cResolver;
     private SensorManager mSensorManager;
