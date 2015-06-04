@@ -11,22 +11,24 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/metrics"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/LatWrapper"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="left">
 
             <TextView
                 android:id="@+id/latitude_label"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
+                android:layout_width="wrap_content"
                 android:text="@string/lat_label"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/label_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -34,10 +36,9 @@
             <TextView
                 android:id="@+id/latitude"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_below="@id/latitude_label"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -46,17 +47,17 @@
 
         <RelativeLayout
             android:id="@+id/LonWrapper"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_below="@id/LatWrapper">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/longitude_label"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
+                android:layout_width="wrap_content"
                 android:text="@string/lon_label"
+                android:textAlignment="center"
                 android:textSize="@dimen/label_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -64,10 +65,9 @@
             <TextView
                 android:id="@+id/longitude"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_below="@id/longitude_label"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
+                android:textAlignment="center"
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -75,16 +75,17 @@
 
         <RelativeLayout
             android:id="@+id/headingWrapper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/heading_label"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
                 android:text="@string/heading_label"
+                android:textAlignment="center"
                 android:textSize="@dimen/label_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -94,36 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_below="@id/heading_label"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
-                android:textSize="@dimen/reading_text_size"
-                android:textColor="@android:color/white">
-            </TextView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/speedInMpsWrapper"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/speed_in_mps_label"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
-                android:text="@string/speed_in_mps_label"
-                android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
-            </TextView>
-
-            <TextView
-                android:id="@+id/speed_in_mps"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/speed_in_mps_label"
-                android:gravity="left"
+                android:textAlignment="center"
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -131,16 +103,17 @@
 
         <RelativeLayout
             android:id="@+id/speedInKnotsWrapper"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:gravity="right">
 
             <TextView
                 android:id="@+id/speed_in_knots_label"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:gravity="left"
                 android:text="@string/speed_in_knots_label"
+                android:textAlignment="viewEnd"
                 android:textSize="@dimen/label_text_size"
                 android:textColor="@android:color/white">
             </TextView>
@@ -149,25 +122,26 @@
                 android:id="@+id/speed_in_knots"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@id/speed_in_knots_label"
-                android:gravity="left"
+                android:textAlignment="viewEnd"
                 android:textSize="@dimen/reading_text_size"
                 android:textColor="@android:color/white">
             </TextView>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/mapWrapper"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <com.nutiteq.ui.MapView
-                android:id="@+id/map_view"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                />
-        </RelativeLayout>
-
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/mapWrapper"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/metrics">
+
+        <com.nutiteq.ui.MapView
+            android:id="@+id/map_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            />
+    </RelativeLayout>
+
 </RelativeLayout>

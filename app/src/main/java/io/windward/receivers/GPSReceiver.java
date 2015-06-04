@@ -18,7 +18,6 @@ public class GPSReceiver extends BroadcastReceiver {
     private Activity activity;
     private TextView latTextField;
     private TextView lonTextField;
-    private TextView speedMPS;
     private TextView speedKnots;
     private String lat;
     private String lon;
@@ -34,7 +33,6 @@ public class GPSReceiver extends BroadcastReceiver {
         this.activity = activity;
         this.latTextField = (TextView) activity.findViewById(R.id.latitude);
         this.lonTextField = (TextView) activity.findViewById(R.id.longitude);
-        this.speedMPS = (TextView) activity.findViewById(R.id.speed_in_mps);
         this.speedKnots = (TextView) activity.findViewById(R.id.speed_in_knots);
         this.plotter = plotter;
     }
@@ -60,9 +58,8 @@ public class GPSReceiver extends BroadcastReceiver {
                 this.lonTextField.setText(lonDegrees + "° W");
             }
 
-            if (this.speedMPS != null) {
+            if (this.speedKnots != null) {
                 knots = mps * METERS_TO_KNOTS;
-                this.speedMPS.setText(String.valueOf(mps));
                 this.speedKnots.setText(String.valueOf(knots));
             }
 

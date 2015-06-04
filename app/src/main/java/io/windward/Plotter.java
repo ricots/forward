@@ -3,6 +3,8 @@ package io.windward;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.Display;
+import android.view.Surface;
 
 import com.nutiteq.core.MapPos;
 import com.nutiteq.core.MapRange;
@@ -71,6 +73,10 @@ public class Plotter {
         this.heading = heading;
     }
 
+    public float getHeading() {
+        return this.heading;
+    }
+
     public void plot(float lat, float lon) {
         clearOldPlotPoints();
         MapPos pos = new MapPos(lon, lat);
@@ -78,7 +84,17 @@ public class Plotter {
         Marker m = new Marker(wgs84, sharedMarkerStyle);
 
         // Rotation is clockwise in Nutiteq
-        m.setRotation(-heading);
+        Display d = activity.getWindowManager().getDefaultDisplay();
+        int rotation = d.getRotation();
+        if (rotation == Surface.ROTATION_0) {
+            m.setRotation(-heading);
+        } else if (rotation == Surface.ROTATION_180) {
+            m.setRotation(-heading - 180);
+        } else if (rotation == Surface.ROTATION_90) {
+            m.setRotation(-heading - 90);
+        } else if (rotation == Surface.ROTATION_270) {
+            m.setRotation(-heading - 270);
+        }
         vectorDataSource.add(m);
         mapView.setFocusPos(wgs84, 0);
         mapView.setZoom(15, wgs84, 0);

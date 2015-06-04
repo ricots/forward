@@ -27,6 +27,7 @@ import io.windward.services.MagnetoService;
 
 
 public class MainActivity extends Activity {
+    public static final String INTENT_EXTRA_HEADING = "heading";
     private BroadcastReceiver gpsReceiver;
     private BroadcastReceiver magnetoReceiver;
     private static final String LICENSE_KEY = "XTUN3Q0ZEYktTQjh1eEpZWHJ3aGRJbk9VZ0ZCdnVUZytBaFFiU00xWFhxSUVleUQzRDgxUGNPQ0puWko3Q2c9PQoKcHJvZHVjdHM9c2RrLWFuZHJvaWQtMy4qCnBhY2thZ2VOYW1lPWlvLndpbmR3YXJkCndhdGVybWFyaz1udXRpdGVxCnVzZXJLZXk9NTczOTZmZjU5Yjc0MDhiM2RkYWUwMzNjODZiODFjNmQK";
@@ -61,18 +62,17 @@ public class MainActivity extends Activity {
         setContentView(io.windward.R.layout.activity_main);
 
         if (savedInstanceState != null) {
+//            plotter.setHeading(savedInstanceState.getFloat(INTENT_EXTRA_HEADING));
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 findViewById(R.id.LatWrapper).setVisibility(View.GONE);
                 findViewById(R.id.LonWrapper).setVisibility(View.GONE);
                 findViewById(R.id.headingWrapper).setVisibility(View.GONE);
                 findViewById(R.id.speedInKnotsWrapper).setVisibility(View.GONE);
-                findViewById(R.id.speedInMpsWrapper).setVisibility(View.GONE);
             } else {
                 findViewById(R.id.LatWrapper).setVisibility(View.VISIBLE);
                 findViewById(R.id.LonWrapper).setVisibility(View.VISIBLE);
                 findViewById(R.id.headingWrapper).setVisibility(View.VISIBLE);
                 findViewById(R.id.speedInKnotsWrapper).setVisibility(View.VISIBLE);
-                findViewById(R.id.speedInMpsWrapper).setVisibility(View.VISIBLE);
                 findViewById(R.id.mapWrapper).setVisibility(View.VISIBLE);
             }
         }
@@ -90,6 +90,12 @@ public class MainActivity extends Activity {
         startService(new Intent(this, GPSService.class));
         startService(new Intent(this, MagnetoService.class));
         startOfflineMaps();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        savedInstanceState.putFloat(INTENT_EXTRA_HEADING, plotter.getHeading());
+//        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
