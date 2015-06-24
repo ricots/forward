@@ -1,4 +1,4 @@
-package io.windward.receivers;
+package io.forward.receivers;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 
-import io.windward.Plotter;
-import io.windward.R;
-import io.windward.services.GPSService;
+import io.forward.Plotter;
+import io.forward.R;
+import io.forward.services.GPSService;
 
 public class GPSReceiver extends BroadcastReceiver {
     private static final float METERS_TO_KNOTS = 1.94384f;

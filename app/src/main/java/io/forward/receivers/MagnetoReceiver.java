@@ -1,4 +1,4 @@
-package io.windward.receivers;
+package io.forward.receivers;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
-import io.windward.Plotter;
-import io.windward.R;
-import io.windward.services.MagnetoService;
+import io.forward.Plotter;
+import io.forward.R;
+import io.forward.services.MagnetoService;
 
 public class MagnetoReceiver extends BroadcastReceiver {
     private Activity activity;

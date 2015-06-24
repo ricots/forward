@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.0"
 
     defaultConfig {
-        applicationId "io.windward"
+        applicationId "io.forward"
         minSdkVersion 18
         targetSdkVersion 18
         versionCode 1

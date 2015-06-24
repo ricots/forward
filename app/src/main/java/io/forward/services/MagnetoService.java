@@ -1,4 +1,4 @@
-package io.windward.services;
+package io.forward.services;
 
 import android.app.IntentService;
 import android.content.ContentResolver;
@@ -10,8 +10,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-import io.windward.MainActivity;
-import io.windward.receivers.MagnetoReceiver;
+import io.forward.MainActivity;
+import io.forward.receivers.MagnetoReceiver;
 
 public class MagnetoService extends IntentService implements SensorEventListener {
     public static final String INTENT_EXTRA_HEADING = "azimuth";

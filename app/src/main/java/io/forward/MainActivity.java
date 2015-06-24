@@ -1,4 +1,4 @@
-package io.windward;
+package io.forward;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -20,10 +20,10 @@ import com.nutiteq.vectortiles.MBVectorTileDecoder;
 import com.nutiteq.vectortiles.MBVectorTileStyleSet;
 import com.nutiteq.wrappedcommons.UnsignedCharVector;
 
-import io.windward.receivers.GPSReceiver;
-import io.windward.receivers.MagnetoReceiver;
-import io.windward.services.GPSService;
-import io.windward.services.MagnetoService;
+import io.forward.receivers.GPSReceiver;
+import io.forward.receivers.MagnetoReceiver;
+import io.forward.services.GPSService;
+import io.forward.services.MagnetoService;
 
 
 public class MainActivity extends Activity {
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(io.windward.R.layout.activity_main);
+        setContentView(io.forward.R.layout.activity_main);
 
         if (savedInstanceState != null) {
 //            plotter.setHeading(savedInstanceState.getFloat(INTENT_EXTRA_HEADING));
@@ -101,7 +101,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(io.windward.R.menu.menu_main, menu);
+        getMenuInflater().inflate(io.forward.R.menu.menu_main, menu);
         return true;
     }
 
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == io.windward.R.id.action_settings) {
+        if (id == io.forward.R.id.action_settings) {
             return true;
         }
 

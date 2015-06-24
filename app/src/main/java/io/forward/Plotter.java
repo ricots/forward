@@ -1,4 +1,4 @@
-package io.windward;
+package io.forward;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
