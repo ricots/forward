@@ -3,17 +3,29 @@
     android:configChanges="orientation|keyboardHidden|screenSize"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@android:color/background_dark"
     tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/mapWrapper"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <com.nutiteq.ui.MapView
+            android:id="@+id/map_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/metrics"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -30,7 +42,8 @@
                 android:text="@string/lat_label"
                 android:textAlignment="viewStart"
                 android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
 
             <TextView
@@ -40,7 +53,8 @@
                 android:layout_below="@id/latitude_label"
                 android:textAlignment="viewStart"
                 android:textSize="@dimen/reading_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
 
         </RelativeLayout>
@@ -59,7 +73,8 @@
                 android:text="@string/lon_label"
                 android:textAlignment="center"
                 android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
 
             <TextView
@@ -69,7 +84,8 @@
                 android:layout_below="@id/longitude_label"
                 android:textAlignment="center"
                 android:textSize="@dimen/reading_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
         </RelativeLayout>
 
@@ -87,7 +103,8 @@
                 android:text="@string/heading_label"
                 android:textAlignment="center"
                 android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
 
             <TextView
@@ -97,7 +114,8 @@
                 android:layout_below="@id/heading_label"
                 android:textAlignment="center"
                 android:textSize="@dimen/reading_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
         </RelativeLayout>
 
@@ -115,7 +133,8 @@
                 android:text="@string/speed_in_knots_label"
                 android:textAlignment="viewEnd"
                 android:textSize="@dimen/label_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
 
             <TextView
@@ -125,23 +144,11 @@
                 android:layout_below="@id/speed_in_knots_label"
                 android:textAlignment="viewEnd"
                 android:textSize="@dimen/reading_text_size"
-                android:textColor="@android:color/white">
+                android:textStyle="bold"
+                android:textColor="@android:color/black">
             </TextView>
         </RelativeLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/mapWrapper"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/metrics">
-
-        <com.nutiteq.ui.MapView
-            android:id="@+id/map_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            />
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
     public static final String INTENT_EXTRA_HEADING = "heading";
     private BroadcastReceiver gpsReceiver;
     private BroadcastReceiver magnetoReceiver;
-    private static final String LICENSE_KEY = "XTUN3Q0ZEYktTQjh1eEpZWHJ3aGRJbk9VZ0ZCdnVUZytBaFFiU00xWFhxSUVleUQzRDgxUGNPQ0puWko3Q2c9PQoKcHJvZHVjdHM9c2RrLWFuZHJvaWQtMy4qCnBhY2thZ2VOYW1lPWlvLndpbmR3YXJkCndhdGVybWFyaz1udXRpdGVxCnVzZXJLZXk9NTczOTZmZjU5Yjc0MDhiM2RkYWUwMzNjODZiODFjNmQK";
+    private static final String LICENSE_KEY = "XTUMwQ0ZDREU5bUkvSm5SRjRNYnh5NUFDc3NsbW41U2NBaFVBaC92YzYrYXV3WWh3eDNCTElEaFNnTkpPM2I4PQoKcHJvZHVjdHM9c2RrLWFuZHJvaWQtMy4qCnBhY2thZ2VOYW1lPWlvLmZvcndhcmQKd2F0ZXJtYXJrPW51dGl0ZXEKdXNlcktleT1hOTEwMDM1NjQ2NjJhZjM4MWZjMjZmNGE1NDAzYTNjYQo=";
     public static LocalBroadcastManager broadcastManager;
     private MapView mapView;
     private Plotter plotter;
