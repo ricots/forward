@@ -48,16 +48,14 @@ public class GPSService extends IntentService implements LocationListener {
         longitude = location.getLongitude();
 
         // Not sure why this needs to be reversed but the default format is to get it as a negative number
-        longitude = -longitude;
         speedInMPS = location.getSpeed();
-
         Intent i = new Intent();
         i.setAction(Intent.ACTION_SEND);
 
         String latDegrees = location.convert(latitude, Location.FORMAT_DEGREES);
         String lonDegrees = location.convert(longitude, Location.FORMAT_DEGREES);
-        latDegrees = latDegrees.substring(0, latDegrees.length() - 2);
-        lonDegrees = lonDegrees.substring(0, lonDegrees.length() - 2);
+        latDegrees = latDegrees.substring(0, 6);
+        lonDegrees = lonDegrees.substring(1, 8);
 
         i.putExtra(INTENT_EXTRA_LAT_DEGREES, latDegrees);
         i.putExtra(INTENT_EXTRA_LON_DEGREES, lonDegrees);

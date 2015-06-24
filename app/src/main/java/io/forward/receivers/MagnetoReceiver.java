@@ -27,7 +27,7 @@ public class MagnetoReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String heading = intent.getStringExtra(MagnetoService.INTENT_EXTRA_HEADING);
         if (heading != null && heading != null) {
-            plotter.setHeading(Float.parseFloat(heading));
+            plotter.updateHeading(Float.parseFloat(heading));
 //            Log.d("HEADING: ", heading);
             headingText.setText(heading + "°");
         }

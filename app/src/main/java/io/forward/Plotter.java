@@ -23,7 +23,7 @@ import com.nutiteq.vectorelements.Marker;
 public class Plotter {
     private static final int ZOOM_LEVEL = 10;
 //    private static final float BOAT_SIZE = ZOOM_LEVEL * (float)(100 * (float)(1/ZOOM_LEVEL));
-    private static final float BOAT_SIZE = ZOOM_LEVEL * (75 / ZOOM_LEVEL);
+    private static final float BOAT_SIZE = ZOOM_LEVEL * 2;
     private Activity activity;
     private MapView mapView;
     private Projection proj;
@@ -37,6 +37,8 @@ public class Plotter {
     private MarkerStyleBuilder markerStyleBuilder;
     private MarkerStyle sharedMarkerStyle;
     private float heading;
+    private float lat;
+    private float lon;
 
     public Plotter(Activity activity) {
         this.activity = activity;
@@ -69,15 +71,18 @@ public class Plotter {
         vectorDataSource.removeAll();
     }
 
-    public void setHeading(float heading) {
+    public void updateHeading(float heading) {
         this.heading = heading;
+        this.plot();
     }
 
-    public float getHeading() {
-        return this.heading;
+    public void updateGPS(float lat, float lon) {
+        this.lat = lat;
+        this.lon = lon;
+        this.plot();
     }
 
-    public void plot(float lat, float lon) {
+    private void plot() {
         clearOldPlotPoints();
         MapPos pos = new MapPos(lon, lat);
         MapPos wgs84 = proj.fromWgs84(pos);
@@ -86,15 +91,16 @@ public class Plotter {
         // Rotation is clockwise in Nutiteq
         Display d = activity.getWindowManager().getDefaultDisplay();
         int rotation = d.getRotation();
-        if (rotation == Surface.ROTATION_0) {
-            m.setRotation(-heading);
+        if (rotation == Surface.ROTATION_90) {
+            m.setRotation(-heading - 90);
         } else if (rotation == Surface.ROTATION_180) {
             m.setRotation(-heading - 180);
-        } else if (rotation == Surface.ROTATION_90) {
-            m.setRotation(-heading - 90);
         } else if (rotation == Surface.ROTATION_270) {
             m.setRotation(-heading - 270);
+        } else {
+            m.setRotation(-heading);
         }
+
         vectorDataSource.add(m);
         mapView.setFocusPos(wgs84, 0);
         mapView.setZoom(15, wgs84, 0);

@@ -43,7 +43,6 @@ public class GPSReceiver extends BroadcastReceiver {
         lonDegrees = intent.getStringExtra(GPSService.INTENT_EXTRA_LON_DEGREES);
         lat = intent.getStringExtra(GPSService.INTENT_EXTRA_LAT_MINUTES);
         lon = intent.getStringExtra(GPSService.INTENT_EXTRA_LON_MINUTES);
-
         mps = intent.getFloatExtra(GPSService.INTENT_EXTRA_SPEED, 0.0f);
 
         if (lat != null && lon != null) {
@@ -64,7 +63,7 @@ public class GPSReceiver extends BroadcastReceiver {
             }
 
             if (latDegrees != null && lonDegrees != null) {
-                plotter.plot(Float.parseFloat(latDegrees), Float.parseFloat(lonDegrees));
+                plotter.updateGPS(Float.parseFloat(latDegrees), -Float.parseFloat(lonDegrees));
             }
         }
     }
