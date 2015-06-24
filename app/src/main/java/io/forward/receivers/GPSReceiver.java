@@ -37,6 +37,10 @@ public class GPSReceiver extends BroadcastReceiver {
         this.plotter = plotter;
     }
 
+    public float getSpeedInKnots() {
+        return this.knots;
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         latDegrees = intent.getStringExtra(GPSService.INTENT_EXTRA_LAT_DEGREES);
@@ -47,7 +51,6 @@ public class GPSReceiver extends BroadcastReceiver {
 
         if (lat != null && lon != null) {
             Log.d("GPS: ", lat + " " + lon);
-
 
             if (this.latTextField != null && lat != null) {
                 this.latTextField.setText(latDegrees + "° N");

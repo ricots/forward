@@ -1,15 +1,12 @@
 package io.forward;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.nutiteq.datasources.NutiteqOnlineTileDataSource;
 import com.nutiteq.datasources.TileDataSource;
@@ -28,8 +25,11 @@ import io.forward.services.MagnetoService;
 
 public class MainActivity extends Activity {
     public static final String INTENT_EXTRA_HEADING = "heading";
-    private BroadcastReceiver gpsReceiver;
-    private BroadcastReceiver magnetoReceiver;
+    public static final String INTENT_EXTRA_SPEED_IN_KNOTS = "speed_in_knots";
+    public static final String INTENT_EXTRA_LATITUDE = "lat";
+    public static final String INTENT_EXTRA_LONGITUDE = "lon";
+    private GPSReceiver gpsReceiver;
+    private MagnetoReceiver magnetoReceiver;
     private static final String LICENSE_KEY = "XTUMwQ0ZDREU5bUkvSm5SRjRNYnh5NUFDc3NsbW41U2NBaFVBaC92YzYrYXV3WWh3eDNCTElEaFNnTkpPM2I4PQoKcHJvZHVjdHM9c2RrLWFuZHJvaWQtMy4qCnBhY2thZ2VOYW1lPWlvLmZvcndhcmQKd2F0ZXJtYXJrPW51dGl0ZXEKdXNlcktleT1hOTEwMDM1NjQ2NjJhZjM4MWZjMjZmNGE1NDAzYTNjYQo=";
     public static LocalBroadcastManager broadcastManager;
     private MapView mapView;
@@ -61,22 +61,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(io.forward.R.layout.activity_main);
 
-        if (savedInstanceState != null) {
-//            plotter.setHeading(savedInstanceState.getFloat(INTENT_EXTRA_HEADING));
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                findViewById(R.id.LatWrapper).setVisibility(View.GONE);
-                findViewById(R.id.LonWrapper).setVisibility(View.GONE);
-                findViewById(R.id.headingWrapper).setVisibility(View.GONE);
-                findViewById(R.id.speedInKnotsWrapper).setVisibility(View.GONE);
-            } else {
-                findViewById(R.id.LatWrapper).setVisibility(View.VISIBLE);
-                findViewById(R.id.LonWrapper).setVisibility(View.VISIBLE);
-                findViewById(R.id.headingWrapper).setVisibility(View.VISIBLE);
-                findViewById(R.id.speedInKnotsWrapper).setVisibility(View.VISIBLE);
-                findViewById(R.id.mapWrapper).setVisibility(View.VISIBLE);
-            }
-        }
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SEND);
         plotter = new Plotter(this);
@@ -90,12 +74,26 @@ public class MainActivity extends Activity {
         startService(new Intent(this, GPSService.class));
         startService(new Intent(this, MagnetoService.class));
         startOfflineMaps();
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(INTENT_EXTRA_HEADING)) {
+                plotter.updateHeading(savedInstanceState.getFloat(INTENT_EXTRA_HEADING));
+            }
+
+            if (savedInstanceState.containsKey(INTENT_EXTRA_LATITUDE) && savedInstanceState.containsKey(INTENT_EXTRA_LONGITUDE)) {
+                plotter.updateGPS(savedInstanceState.getFloat(INTENT_EXTRA_LATITUDE), savedInstanceState.getFloat(INTENT_EXTRA_LONGITUDE));
+            }
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-//        savedInstanceState.putFloat(INTENT_EXTRA_HEADING, plotter.getHeading());
-//        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putFloat(INTENT_EXTRA_HEADING, plotter.getHeading());
+        savedInstanceState.putFloat(INTENT_EXTRA_LATITUDE, plotter.getLat());
+        savedInstanceState.putFloat(INTENT_EXTRA_LONGITUDE, plotter.getLon());
+        savedInstanceState.putFloat(INTENT_EXTRA_SPEED_IN_KNOTS, gpsReceiver.getSpeedInKnots());
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

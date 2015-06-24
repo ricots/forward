@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.view.Display;
+import android.view.Surface;
 import android.widget.TextView;
 
 import io.forward.Plotter;
@@ -25,9 +27,22 @@ public class MagnetoReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String heading = intent.getStringExtra(MagnetoService.INTENT_EXTRA_HEADING);
-        if (heading != null && heading != null) {
-            plotter.updateHeading(Float.parseFloat(heading));
+        String headingAsStr = intent.getStringExtra(MagnetoService.INTENT_EXTRA_HEADING);
+        if (headingAsStr != null && headingAsStr != null) {
+            float heading = Float.parseFloat(headingAsStr);
+            // Rotation is clockwise in Nutiteq
+            Display d = activity.getWindowManager().getDefaultDisplay();
+            int rotation = d.getRotation();
+
+            if (rotation == Surface.ROTATION_90) {
+                heading += 90;
+            } else if (rotation == Surface.ROTATION_180) {
+                heading += 180;
+            } else if (rotation == Surface.ROTATION_270) {
+                heading -= 90;
+            }
+
+            plotter.updateHeading(heading);
 //            Log.d("HEADING: ", heading);
             headingText.setText(heading + "°");
         }

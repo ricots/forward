@@ -3,8 +3,6 @@ package io.forward;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.Display;
-import android.view.Surface;
 
 import com.nutiteq.core.MapPos;
 import com.nutiteq.core.MapRange;
@@ -71,6 +69,18 @@ public class Plotter {
         vectorDataSource.removeAll();
     }
 
+    public float getHeading() {
+        return this.heading;
+    }
+
+    public float getLat() {
+        return this.lat;
+    }
+
+    public float getLon() {
+        return this.lon;
+    }
+
     public void updateHeading(float heading) {
         this.heading = heading;
         this.plot();
@@ -87,20 +97,7 @@ public class Plotter {
         MapPos pos = new MapPos(lon, lat);
         MapPos wgs84 = proj.fromWgs84(pos);
         Marker m = new Marker(wgs84, sharedMarkerStyle);
-
-        // Rotation is clockwise in Nutiteq
-        Display d = activity.getWindowManager().getDefaultDisplay();
-        int rotation = d.getRotation();
-        if (rotation == Surface.ROTATION_90) {
-            m.setRotation(-heading - 90);
-        } else if (rotation == Surface.ROTATION_180) {
-            m.setRotation(-heading - 180);
-        } else if (rotation == Surface.ROTATION_270) {
-            m.setRotation(-heading - 270);
-        } else {
-            m.setRotation(-heading);
-        }
-
+        m.setRotation(heading);
         vectorDataSource.add(m);
         mapView.setFocusPos(wgs84, 0);
         mapView.setZoom(15, wgs84, 0);
