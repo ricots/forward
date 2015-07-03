@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.nutiteq.datasources.NutiteqOnlineTileDataSource;
 import com.nutiteq.datasources.TileDataSource;
 import com.nutiteq.layers.VectorTileLayer;
@@ -17,6 +18,11 @@ import com.nutiteq.vectortiles.MBVectorTileDecoder;
 import com.nutiteq.vectortiles.MBVectorTileStyleSet;
 import com.nutiteq.wrappedcommons.UnsignedCharVector;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import io.fabric.sdk.android.Fabric;
 import io.forward.receivers.GPSReceiver;
 import io.forward.receivers.MagnetoReceiver;
 import io.forward.services.GPSService;
@@ -24,6 +30,11 @@ import io.forward.services.MagnetoService;
 
 
 public class MainActivity extends Activity {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "CFAKlpfUPlK5uQ0NeKcefgI1v";
+    private static final String TWITTER_SECRET = "rE6Bcb7TgC4q0XEpfUOqJ579RkIrK1m35rop7m43t4gmiocpb2";
+
     public static final String INTENT_EXTRA_HEADING = "heading";
     public static final String INTENT_EXTRA_SPEED_IN_KNOTS = "speed_in_knots";
     public static final String INTENT_EXTRA_LATITUDE = "lat";
@@ -59,7 +70,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(io.forward.R.layout.activity_main);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Crashlytics(), new Twitter(authConfig), new TweetComposer());
+                setContentView(io.forward.R.layout.activity_main);
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SEND);
@@ -113,6 +126,9 @@ public class MainActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == io.forward.R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_compose_tweet) {
+            TweetComposer.Builder builder = new TweetComposer.Builder(this);
+            builder.show();
         }
 
         return super.onOptionsItemSelected(item);

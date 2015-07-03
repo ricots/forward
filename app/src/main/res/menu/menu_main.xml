@@ -2,9 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
-    <item android:id="@+id/action_connect_fb" android:title="@string/action_connect_fb"
+    <item android:id="@+id/action_compose_tweet" android:title="@string/action_compose_tweet"
         android:orderInCategory="101" android:showAsAction="never" />
-    <item android:id="@+id/action_post_data" android:title="@string/action_post_data"
-        android:orderInCategory="102" android:showAsAction="never" />
 
 </menu>

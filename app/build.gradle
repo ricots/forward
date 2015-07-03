@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 18
+    compileSdkVersion 21
     buildToolsVersion "21.1.0"
 
     defaultConfig {
@@ -30,4 +30,36 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.+'
     compile files('libs/nutiteq-maps-sdk.jar')
     compile files('libs/libnutiteq_maps_sdk.so')
+    compile('com.crashlytics.sdk.android:crashlytics:2.4.0@aar') {
+        transitive = true;
+    }
+    compile('com.twitter.sdk.android:tweet-composer:0.8.0@aar') {
+        transitive = true;
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
+apply plugin: 'io.fabric'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+dependencies {
+    compile('com.twitter.sdk.android:twitter:1.5.1@aar') {
+        transitive = true
+    }
+    compile('com.twitter.sdk.android:tweet-composer:0.8.0@aar') {
+        transitive = true;
+    }
 }
