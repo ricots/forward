@@ -50,7 +50,7 @@ public class Plotter {
         vectorLayer.setVisibleZoomRange(range);
 
         androidMarker = BitmapFactory.decodeResource(activity.getResources(), R.drawable.marker);
-        marker = BitmapUtils.CreateBitmapFromAndroidBitmap(androidMarker);
+        marker = BitmapUtils.createBitmapFromAndroidBitmap(androidMarker);
         markerStyleBuilder = new MarkerStyleBuilder();
         markerStyleBuilder.setBitmap(marker);
         markerStyleBuilder.setSize(BOAT_SIZE);

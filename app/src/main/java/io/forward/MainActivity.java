@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
     private void startOfflineMaps() {
         // 1. The initial step: register your license. This must be done before using MapView!
-        MapView.RegisterLicense(LICENSE_KEY, getApplicationContext());
+        MapView.registerLicense(LICENSE_KEY, getApplicationContext());
 
         // Create map view
         mapView = (MapView) this.findViewById(R.id.map_view);

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "io.forward"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -21,12 +21,16 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar', '*.so'])
+    compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.nutiteq:nutiteq-sdk:3.2.3@aar'
     compile('com.crashlytics.sdk.android:crashlytics:2.4.0@aar') {
         transitive = true;
     }
     compile('com.twitter.sdk.android:tweet-composer:0.8.0@aar') {
         transitive = true;
+    }
+    compile('com.twitter.sdk.android:twitter:1.5.1@aar') {
+        transitive = true
     }
 }
 
@@ -52,14 +56,5 @@ repositories {
     }
     maven {
         url "http://repository-nutiteq.forge.cloudbees.com/snapshot/"
-    }
-}
-
-dependencies {
-    compile('com.twitter.sdk.android:twitter:1.5.1@aar') {
-        transitive = true
-    }
-    compile('com.twitter.sdk.android:tweet-composer:0.8.0@aar') {
-        transitive = true;
     }
 }
